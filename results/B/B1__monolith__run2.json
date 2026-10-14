@@ -1,0 +1,24 @@
+{
+ "problem": "B1",
+ "pipeline": "monolith",
+ "run": 2,
+ "model": "qwen2.5:3b",
+ "timestamp": "2026-10-14T10:54:29",
+ "answer": {
+  "status": "unique",
+  "solution": {
+   "Artem": 4,
+   "Bohdana": 3,
+   "Viktor": 2,
+   "Halyna": 1,
+   "Dmytro": 5
+  },
+  "objective": null
+ },
+ "trace": {
+  "reasoning": "Given the conditions, let's analyze the possible positions for each person in the queue. We start with condition 5: Bohdana is not at the front. So Bohdana can be in positions 2, 3, 4, or 5. Condition 4 states that Halyna is not at the back, so she can be in positions 1, 2, 3, or 4. Condition 2 states that Artem is directly behind Bohdana, so if Bohdana is in position 2, Artem must be in position 3, and so on. Condition 1 states that Viktor is somewhere in front of Halyna, so if Halyna is in position 4, Viktor must be in position 1 or 2. Condition 3 states that Dmytro is either at the very front or at the very back, so Dmytro can be in position 1 or 5. Let's test these conditions step by step. If Bohdana is in position 2, Artem must be in position 3. If Halyna is in position 4, Viktor must be in position 1 or 2. If Dmytro is in position 1, then Viktor must be in position 2, which contradicts the condition that Viktor is in front of Halyna. So Dmytro must be in position 5. If Halyna is in position 4, Viktor must be in position 1. If Dmytro is in position 5, then Bohdana must be in position 4, which contradicts the condition that Bohdana is not at the front. So Bohdana must be in position 3. If Halyna is in position 4, Viktor must be in position 1. If Dmytro is in position 5, then Artem must be in position 4. The only position left for Viktor is position 2. Therefore, the order of the queue is: Artem (4), Bohdana (3), Viktor (2), Halyna (1), Dmytro (5). This satisfies all conditions."
+ },
+ "error": null,
+ "seconds": 27.6,
+ "llm_calls": 1
+}

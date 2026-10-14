@@ -3,7 +3,7 @@
  "pipeline": "hybrid",
  "run": 1,
  "model": "qwen2.5:3b",
- "timestamp": "2026-10-14T09:53:53",
+ "timestamp": "2026-10-14T10:54:57",
  "answer": {
   "status": "unique",
   "solution": {
@@ -51,11 +51,11 @@
       ]
      ],
      "constraints": [
-      "(Viktor > Halyna)",
-      "(Artem == Bohdana + 1)",
-      "(Dmytro == 1 or Dmytro == 5)",
-      "(Halyna != 5)",
-      "(Bohdana != 1)"
+      "Viktor - Halyna > 0",
+      "Artem - Bohdana == 1",
+      "Dmytro == 1 or Dmytro == 5",
+      "Halyna != 5",
+      "Bohdana != 1"
      ]
     },
     "errors": []
@@ -75,6 +75,6 @@
   }
  },
  "error": null,
- "seconds": 14.7,
+ "seconds": 19.0,
  "llm_calls": 2
 }

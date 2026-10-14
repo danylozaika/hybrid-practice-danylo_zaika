@@ -3,7 +3,7 @@
  "pipeline": "hybrid",
  "run": 1,
  "model": "qwen2.5:3b",
- "timestamp": "2026-10-14T09:53:26",
+ "timestamp": "2026-10-14T10:56:19",
  "answer": {
   "status": "none",
   "solution": {},
@@ -68,29 +68,16 @@
        "R",
        "G",
        "P"
-      ],
-      [
-       "N",
-       "O",
-       "G",
-       "R",
-       "G",
-       "P"
       ]
      ],
      "constraints": [
       "A * 100 + E * 10 + D == N * 100 + O * 10 + D",
-      "E * 10 + D == G * 10 + R",
-      "G * 10 + R + H == G * 10 + P",
-      "N * 10 + O == A * 100 + E * 10 + D",
-      "O > N",
-      "A > 0",
+      "N * 100 + O * 10 + D + E * 10 + D * 1 == G * 100 + R * 10 + H",
+      "A >= 1",
+      "A <= 9",
       "N % 2 == 0",
-      "A != 0",
-      "N != 0",
-      "O != 0",
-      "R != 0",
-      "P != 0"
+      "O > N",
+      "A != 0"
      ]
     },
     "errors": []
@@ -104,6 +91,6 @@
   }
  },
  "error": null,
- "seconds": 21.8,
+ "seconds": 16.4,
  "llm_calls": 1
 }

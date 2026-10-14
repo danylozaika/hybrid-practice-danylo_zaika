@@ -3,11 +3,89 @@
  "pipeline": "hybrid",
  "run": 1,
  "model": "qwen2.5:3b",
- "timestamp": "2026-10-14T09:54:39",
- "answer": null,
- "trace": null,
- "error": "SyntaxError: invalid syntax. Perhaps you forgot a comma? (<unknown>, line 1)",
- "traceback": "Traceback (most recent call last):\n  File \"C:\\WINDOWS\\system32\\hybrid-practice\\src\\run.py\", line 41, in run_one\n    out = PIPELINES[name].solve(problem)\n  File \"C:\\Windows\\System32\\hybrid-practice\\src\\hybrid.py\", line 163, in solve\n    result = run_solver(ir)\n  File \"C:\\Windows\\System32\\hybrid-practice\\src\\hybrid.py\", line 108, in run_solver\n    return ir_solver.solve(ir, limit=1)\n  File \"C:\\Windows\\System32\\hybrid-practice\\src\\ir_solver.py\", line 119, in solve\n    zv, cons, conv = build(ir)\n  File \"C:\\Windows\\System32\\hybrid-practice\\src\\ir_solver.py\", line 113, in build\n    cons.append(_as_bool(conv(ast.parse(c, mode=\"eval\"))))\n  File \"C:\\Users\\zaika\\AppData\\Local\\Programs\\Python\\Python310\\lib\\ast.py\", line 50, in parse\n    return compile(source, filename, mode, flags,\n  File \"<unknown>\", line 1\n    (Planning == Design review) + (Planning < Design review) == 1\n     ^^^^^^^^^^^^^^^^^^^^^^^^^\nSyntaxError: invalid syntax. Perhaps you forgot a comma?\n",
- "seconds": 10.1,
- "llm_calls": 1
+ "timestamp": "2026-10-14T10:57:16",
+ "answer": {
+  "status": "unique",
+  "solution": {
+   "Planning": "Mon afternoon",
+   "Design_review": "Mon morning",
+   "Budget": "Mon morning",
+   "Hiring": "Wed afternoon",
+   "Security_review": "Wed morning",
+   "Retro": "Wed afternoon"
+  },
+  "objective": null
+ },
+ "trace": {
+  "attempts": [
+   {
+    "ir": {
+     "variables": {
+      "Planning": [
+       1,
+       3
+      ],
+      "Design_review": [
+       1,
+       3
+      ],
+      "Budget": [
+       1,
+       3
+      ],
+      "Hiring": [
+       1,
+       3
+      ],
+      "Security_review": [
+       1,
+       3
+      ],
+      "Retro": [
+       1,
+       3
+      ]
+     },
+     "all_different": [
+      [
+       "Planning",
+       "Design_review"
+      ],
+      [
+       "Budget",
+       "Security_review"
+      ],
+      [
+       "Hiring"
+      ]
+     ],
+     "constraints": [
+      "Retro == 3",
+      "(Planning == 1) + (Design_review == 1) == 1",
+      "Budget == 1 or Budget == 2",
+      "Security_review == Budget + 1",
+      "Hiring != 1",
+      "Budget != Planning"
+     ]
+    },
+    "errors": []
+   }
+  ],
+  "solver": {
+   "status": "unique",
+   "n_solutions": 1,
+   "objective": null,
+   "first_solution": {
+    "Planning": 2,
+    "Design_review": 1,
+    "Budget": 1,
+    "Hiring": 2,
+    "Security_review": 2,
+    "Retro": 3
+   }
+  }
+ },
+ "error": null,
+ "seconds": 17.8,
+ "llm_calls": 2
 }

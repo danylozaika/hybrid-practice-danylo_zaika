@@ -1,0 +1,65 @@
+{
+ "problem": "B5",
+ "pipeline": "hybrid",
+ "run": 2,
+ "model": "qwen2.5:3b",
+ "timestamp": "2026-10-14T10:59:32",
+ "answer": {
+  "status": "unique",
+  "solution": {
+   "Olena": "coffee",
+   "Petro": "juice",
+   "Maria": "tea"
+  },
+  "objective": null
+ },
+ "trace": {
+  "attempts": [
+   {
+    "ir": {
+     "variables": {
+      "Olena": [
+       0,
+       2
+      ],
+      "Petro": [
+       0,
+       2
+      ],
+      "Maria": [
+       0,
+       2
+      ]
+     },
+     "all_different": [
+      [
+       "Olena",
+       "Petro",
+       "Maria"
+      ]
+     ],
+     "constraints": [
+      "Olena != 0",
+      "Petro != 1",
+      "Maria != 1",
+      "Maria != 2"
+     ]
+    },
+    "errors": []
+   }
+  ],
+  "solver": {
+   "status": "unique",
+   "n_solutions": 1,
+   "objective": null,
+   "first_solution": {
+    "Olena": 1,
+    "Petro": 2,
+    "Maria": 0
+   }
+  }
+ },
+ "error": null,
+ "seconds": 8.0,
+ "llm_calls": 2
+}

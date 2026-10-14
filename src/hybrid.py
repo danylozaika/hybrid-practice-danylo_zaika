@@ -62,8 +62,20 @@ Rules:
 2. Use [lo, hi] for an inclusive integer interval, or
    {{"values": [v1, v2, ...]}} for a finite set.
 3. Put every logical condition in "constraints".
-4. Do not introduce assumptions not stated or implied by the puzzle.
-5. Use only declared variable names and allowed operators.
+4. Use "all_different" for groups of pairwise distinct variables.
+5. Use "objective": null unless optimization is explicitly required.
+6. Do not introduce assumptions not stated or implied by the puzzle.
+7. Use only declared variable names and allowed operators.
+8. For truth-tellers and liars, use variables in [0, 1],
+   where 1 means truthful and 0 means lying.
+9. Encode exactly one with a sum == 1, at most one with <= 1,
+   and at least one with >= 1.
+10. For distinct positions, use all_different.
+    Encode adjacency as abs(A - B) == 1.
+11. For optimization, use:
+    {{"maximize": "expression"}} or {{"minimize": "expression"}}.
+12. Use only integers.
+13. Don't forget commas.
 
 Example:
 A and B are distinct integers from 1 to 3. Their sum is 4.
@@ -71,7 +83,9 @@ A and B are distinct integers from 1 to 3. Their sum is 4.
 IR:
 {{
   "variables": {{"A": [1, 3], "B": [1, 3]}},
+  "all_different": [["A", "B"]],
   "constraints": ["A + B == 4"],
+  "objective": null
 }}
 Puzzle:
 {text}
@@ -147,7 +161,6 @@ def solve(problem: dict) -> dict:
     errors = validate_ir(ir)
     trace["attempts"].append({"ir": ir, "errors": errors})
 
-    # Exactly one retry if validation fails.
     if errors:
         feedback = "\n".join(f"- {e}" for e in errors)
         ir = formalize(problem, feedback=feedback)
