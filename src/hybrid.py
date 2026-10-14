@@ -57,7 +57,7 @@ SYSTEM = "You translate logic puzzles into a formal constraint representation. Y
 FORMALIZER_PROMPT = """Translate the puzzle below into the IR format. Do not solve the puzzle.
 
 {ir_spec}
-
+Helpline: Try mapping each elemenst to a variable and extrapolate rules from given puzzle
 Puzzle:
 {text}
 {feedback}"""
