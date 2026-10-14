@@ -57,7 +57,37 @@ SYSTEM = "You translate logic puzzles into a formal constraint representation. Y
 FORMALIZER_PROMPT = """Translate the puzzle below into the IR format. Do not solve the puzzle.
 
 {ir_spec}
-Helpline: Try mapping each elemenst to a variable and extrapolate rules from given puzzle. Use syntax given in task
+Guidelines:
+1. Identify the main entities and define integer variables for them.
+2. NEVER use strings in variable domains. For categorical values (like drinks, slots, days), secretly map them to integers (e.g., 1, 2, 3) and use these integers in your constraints.
+3. For a queue/line where 1 is the VERY FRONT and N is the VERY BACK, use domain [1, N].
+4. Put ALL distinct variables into a SINGLE list inside `all_different`: [["Var1", "Var2", "Var3"]].
+5. "A is somewhere in front of / before B" means A < B.
+6. "A is directly behind B" means A == B + 1. "A is directly in front of B" means A + 1 == B.
+7. "Not at the back" means A != N. "Not at the front" means A != 1.
+
+Example Puzzle:
+Three people (Alice, Bob, Charlie) stand in a queue from 1 (front) to 3 (back).
+Alice is somewhere in front of Charlie.
+Bob is directly behind Alice.
+Charlie is not at the back.
+
+Example IR:
+{{
+  "variables": {{
+    "Alice": [1, 3],
+    "Bob": [1, 3],
+    "Charlie": [1, 3]
+  }},
+  "all_different": [
+    ["Alice", "Bob", "Charlie"]
+  ],
+  "constraints": [
+    "Alice < Charlie",
+    "Bob == Alice + 1",
+    "Charlie != 3"
+  ]
+}}
 Puzzle:
 {text}
 {feedback}"""
