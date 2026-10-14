@@ -1,0 +1,109 @@
+{
+ "problem": "B2",
+ "pipeline": "hybrid",
+ "run": 1,
+ "model": "qwen2.5:3b",
+ "timestamp": "2026-10-14T09:53:26",
+ "answer": {
+  "status": "none",
+  "solution": {},
+  "objective": null
+ },
+ "trace": {
+  "attempts": [
+   {
+    "ir": {
+     "variables": {
+      "A": [
+       1,
+       9
+      ],
+      "E": [
+       1,
+       9
+      ],
+      "D": [
+       1,
+       9
+      ],
+      "G": [
+       1,
+       9
+      ],
+      "H": [
+       1,
+       9
+      ],
+      "I": [
+       1,
+       9
+      ],
+      "N": [
+       1,
+       9
+      ],
+      "O": [
+       1,
+       9
+      ],
+      "R": [
+       1,
+       9
+      ],
+      "P": [
+       1,
+       9
+      ]
+     },
+     "all_different": [
+      [
+       "A",
+       "E",
+       "D",
+       "G",
+       "H",
+       "I",
+       "N",
+       "O",
+       "R",
+       "G",
+       "P"
+      ],
+      [
+       "N",
+       "O",
+       "G",
+       "R",
+       "G",
+       "P"
+      ]
+     ],
+     "constraints": [
+      "A * 100 + E * 10 + D == N * 100 + O * 10 + D",
+      "E * 10 + D == G * 10 + R",
+      "G * 10 + R + H == G * 10 + P",
+      "N * 10 + O == A * 100 + E * 10 + D",
+      "O > N",
+      "A > 0",
+      "N % 2 == 0",
+      "A != 0",
+      "N != 0",
+      "O != 0",
+      "R != 0",
+      "P != 0"
+     ]
+    },
+    "errors": []
+   }
+  ],
+  "solver": {
+   "status": "none",
+   "n_solutions": 0,
+   "objective": null,
+   "first_solution": null
+  }
+ },
+ "error": null,
+ "seconds": 21.8,
+ "llm_calls": 1
+}

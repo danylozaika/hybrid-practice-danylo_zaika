@@ -1,0 +1,24 @@
+{
+ "problem": "B1",
+ "pipeline": "monolith",
+ "run": 1,
+ "model": "qwen2.5:3b",
+ "timestamp": "2026-10-14T08:51:33",
+ "answer": {
+  "status": "unique",
+  "solution": {
+   "Artem": 2,
+   "Bohdana": 2,
+   "Viktor": 3,
+   "Halyna": 4,
+   "Dmytro": 5
+  },
+  "objective": 5
+ },
+ "trace": {
+  "reasoning": "Let's analyze the conditions step by step to determine the order of the queue. Given the conditions, we can deduce the following about the positions of the individuals in the queue. Condition 5 states that Bohdana is not at the front, so Bohdana must be in position 2, 3, 4, or 5. Condition 4 states that Halyna is not at the back, so Halyna must be in position 1, 2, 3, or 4. Condition 3 states that Dmytro is either at the very front or at the very back, so Dmytro must be in position 1 or 5. Condition 2 states that Artem stands directly behind Bohdana, so Bohdana must be in position 2 and Artem in position 3. Condition 1 states that Viktor is somewhere in front of Halyna, so we need to place Viktor and Halyna in positions 1, 2, 3, or 4 with Viktor in front of Halyna. Given Bohdana is in position 2, Dmytro must be in position 1 or 5. If Dmytro is in position 1, then Viktor and Halyna must be in positions 3 and 4, but this would violate condition 1. Therefore, Dmytro must be in position 5. This leaves Viktor and Halyna in positions 3 and 4, with Viktor in front of Halyna. The only way to satisfy all conditions is if Viktor is in position 3 and Halyna in position 4. Thus, the order of the queue is Artem (2), Bohdana (2), Viktor (3), Halyna (4), Dmytro (5)."
+ },
+ "error": null,
+ "seconds": 32.5,
+ "llm_calls": 1
+}

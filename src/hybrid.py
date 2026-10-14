@@ -57,7 +57,22 @@ SYSTEM = "You translate logic puzzles into a formal constraint representation. Y
 FORMALIZER_PROMPT = """Translate the puzzle below into the IR format. Do not solve the puzzle.
 
 {ir_spec}
+Rules:
+1. Declare every integer variable and its complete domain.
+2. Use [lo, hi] for an inclusive integer interval, or
+   {{"values": [v1, v2, ...]}} for a finite set.
+3. Put every logical condition in "constraints".
+4. Do not introduce assumptions not stated or implied by the puzzle.
+5. Use only declared variable names and allowed operators.
 
+Example:
+A and B are distinct integers from 1 to 3. Their sum is 4.
+
+IR:
+{{
+  "variables": {{"A": [1, 3], "B": [1, 3]}},
+  "constraints": ["A + B == 4"],
+}}
 Puzzle:
 {text}
 {feedback}"""
@@ -126,25 +141,37 @@ def present(problem: dict, ir: dict, result: dict) -> dict:
 
 
 def solve(problem: dict) -> dict:
-    """Returns {"answer": <Answer as dict>, "trace": {...}}. Raise HybridError if no answer can be produced."""
     trace = {"attempts": []}
 
     ir = formalize(problem)
     errors = validate_ir(ir)
     trace["attempts"].append({"ir": ir, "errors": errors})
 
-    # TODO(team): if `errors` is not empty, make ONE more attempt:
-    #   ir = formalize(problem, feedback="\n".join(errors)); errors = validate_ir(ir); record it in trace.
+    # Exactly one retry if validation fails.
     if errors:
-        raise HybridError("invalid IR: " + "; ".join(errors))
+        feedback = "\n".join(f"- {e}" for e in errors)
+        ir = formalize(problem, feedback=feedback)
+        errors = validate_ir(ir)
+        trace["attempts"].append({"ir": ir, "errors": errors})
+
+    if errors:
+        raise HybridError(
+            "invalid IR after retry: " + "; ".join(errors)
+        )
 
     try:
         result = run_solver(ir)
-    except ValueError as e:                      # the solver rejected the IR
+    except (ValueError, TypeError) as e:
         raise HybridError(f"solver rejected the IR: {e}") from e
-    trace["solver"] = {"status": result["status"], "n_solutions": len(result["solutions"]),
-                       "objective": result.get("objective"),
-                       "first_solution": result["solutions"][0] if result["solutions"] else None}
+
+    trace["solver"] = {
+        "status": result["status"],
+        "n_solutions": len(result["solutions"]),
+        "objective": result.get("objective"),
+        "first_solution": (
+            result["solutions"][0] if result["solutions"] else None
+        ),
+    }
 
     answer = present(problem, ir, result)
     return {"answer": answer, "trace": trace}
